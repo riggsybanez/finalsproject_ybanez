@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/screen_one.dart';
+import 'package:myapp/pages/screen_two.dart';
+import 'package:myapp/pages/screen_three.dart';
+import 'package:myapp/pages/screen_four.dart';
+import 'package:myapp/pages/screen_five.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -67,126 +72,6 @@ class HomeScreen extends StatelessWidget {
           child: const Text('Go to Screen Five'),
         ),
       ])),
-    );
-  }
-}
-
-class ScreenOne extends StatelessWidget {
-  const ScreenOne({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screen One'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-          child: const Text('Return to Home Screen'),
-        ),
-      ),
-    );
-  }
-}
-
-class ScreenTwo extends StatelessWidget {
-  const ScreenTwo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screen Two'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-          child: const Text('Return to Home Screen'),
-        ),
-      ),
-    );
-  }
-}
-
-class ScreenThree extends StatelessWidget {
-  const ScreenThree({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screen Three'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-          child: const Text('Return to Home Screen'),
-        ),
-      ),
-    );
-  }
-}
-
-class ScreenFour extends StatelessWidget {
-  const ScreenFour({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screen Four'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-          child: const Text('Return to Home Screen'),
-        ),
-      ),
-    );
-  }
-}
-
-class ScreenFive extends StatelessWidget {
-  const ScreenFive({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screen Two'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-          child: const Text('Return to Home Screen'),
-        ),
-      ),
     );
   }
 }
