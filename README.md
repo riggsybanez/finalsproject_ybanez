@@ -1,2 +1,3 @@
-# TLA 4: UI Code Challenge
+# Midterm Project
+# Clock Application
 Mobile Development
