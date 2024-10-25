@@ -1,77 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/pages/screen_one.dart';
-import 'package:myapp/pages/screen_two.dart';
-import 'package:myapp/pages/screen_three.dart';
-import 'package:myapp/pages/screen_four.dart';
-import 'package:myapp/pages/screen_five.dart';
+import 'package:myapp/pages/alarm.dart';
+import 'package:myapp/pages/clock.dart';
+import 'package:myapp/pages/timer.dart';
+import 'package:myapp/pages/stopwatch.dart';
 
 void main() {
   runApp(const MaterialApp(
-    home: HomeScreen(),
+    home: Clock(),
   ));
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class BaseScreen extends StatelessWidget {
+  final Widget child;
+  final int selectedIndex;
+
+  const BaseScreen(
+      {super.key, required this.child, required this.selectedIndex});
+
+  void _navigateTo(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => const Alarm()));
+        break;
+      case 1:
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => const Clock()));
+        break;
+      case 2:
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => const Timer()));
+        break;
+      case 3:
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => const Stopwatch()));
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Screen'),
+      backgroundColor: const Color(0xFF333333),
+      body: child,
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color(0xFF808080),
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          if (index != selectedIndex) {
+            _navigateTo(context, index);
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.alarm),
+            label: 'Alarm',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.access_time),
+            label: 'Clock',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.timer),
+            label: 'Timer',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.stop),
+            label: 'Stopwatch',
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
       ),
-      body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ScreenOne()),
-            );
-          },
-          child: const Text('Go to Screen One'),
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ScreenTwo()),
-            );
-          },
-          child: const Text('Go to Screen Two'),
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ScreenThree()),
-            );
-          },
-          child: const Text('Go to Screen Three'),
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ScreenFour()),
-            );
-          },
-          child: const Text('Go to Screen Four'),
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ScreenFive()),
-            );
-          },
-          child: const Text('Go to Screen Five'),
-        ),
-      ])),
     );
   }
 }
