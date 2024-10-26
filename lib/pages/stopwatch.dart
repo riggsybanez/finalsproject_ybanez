@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/main.dart';
 
-class Stopwatch extends StatelessWidget {
+class Stopwatch extends StatefulWidget {
   const Stopwatch({super.key});
+
+  @override
+  _StopwatchState createState() => _StopwatchState();
+}
+
+class _StopwatchState extends State<Stopwatch> {
+  String _time = '00:00:00';
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +19,20 @@ class Stopwatch extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              '00:00:00',
-              style: TextStyle(
+            Text(
+              _time,
+              style: const TextStyle(
                 fontSize: 64,
                 color: Color.fromARGB(255, 220, 220, 220),
               ),
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  _time = '00:00:01';
+                });
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey[300],
               ),
@@ -31,7 +42,11 @@ class Stopwatch extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  _time = '00:00:00';
+                });
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey[300],
               ),

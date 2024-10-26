@@ -10,12 +10,19 @@ void main() {
   ));
 }
 
-class BaseScreen extends StatelessWidget {
+class BaseScreen extends StatefulWidget {
   final Widget child;
   final int selectedIndex;
 
   const BaseScreen(
       {super.key, required this.child, required this.selectedIndex});
+
+  @override
+  _BaseScreenState createState() => _BaseScreenState();
+}
+
+class _BaseScreenState extends State<BaseScreen> {
+  int _selectedIndex = 0;
 
   void _navigateTo(BuildContext context, int index) {
     switch (index) {
@@ -39,15 +46,24 @@ class BaseScreen extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedIndex;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF333333),
-      body: child,
+      body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xFF808080),
-        currentIndex: selectedIndex,
+        currentIndex: _selectedIndex,
         onTap: (index) {
-          if (index != selectedIndex) {
+          if (index != _selectedIndex) {
+            setState(() {
+              _selectedIndex = index;
+            });
             _navigateTo(context, index);
           }
         },

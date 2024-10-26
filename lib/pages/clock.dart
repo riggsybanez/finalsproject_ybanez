@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/main.dart';
 
-class Clock extends StatelessWidget {
+class Clock extends StatefulWidget {
   const Clock({super.key});
 
+  @override
+  _ClockState createState() => _ClockState();
+}
+
+class _ClockState extends State<Clock> {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
