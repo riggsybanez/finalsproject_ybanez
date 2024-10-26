@@ -1,3 +1,3 @@
-# Midterm Project
 # Clock Application
+Midterm Project
 Mobile Development
