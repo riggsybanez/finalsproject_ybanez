@@ -1,2 +1,2 @@
 # Clock Application
-Mobile Development - Midterm Project
+Mobile Development - Finals Project
