@@ -36,7 +36,7 @@ class _BaseScreenState extends State<BaseScreen> {
         break;
       case 2:
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => const Timer()));
+            context, MaterialPageRoute(builder: (_) => const TimerPage()));
         break;
       case 3:
         Navigator.pushReplacement(
