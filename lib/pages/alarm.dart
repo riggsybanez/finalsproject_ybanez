@@ -85,14 +85,19 @@ class _AlarmState extends State<Alarm> {
   Future<AlarmModel?> _showEditAlarmDialog(BuildContext context,
       [AlarmModel? alarm]) async {
     final titleController = TextEditingController();
-    final timeController = TextEditingController();
+    TimeOfDay selectedTime = alarm != null
+        ? TimeOfDay(
+            hour: int.parse(alarm.time.split(':')[0]),
+            minute: int.parse(alarm.time.split(':')[1]),
+          )
+        : TimeOfDay.now();
 
     if (alarm != null) {
       titleController.text = alarm.title;
-      timeController.text = alarm.time;
     }
 
     return showDialog<AlarmModel?>(
+      // Return the updated alarm model
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -104,9 +109,20 @@ class _AlarmState extends State<Alarm> {
                 controller: titleController,
                 decoration: const InputDecoration(hintText: 'Alarm Title'),
               ),
-              TextField(
-                controller: timeController,
-                decoration: const InputDecoration(hintText: 'Time'),
+              ListTile(
+                leading: const Icon(Icons.access_time),
+                title: Text('Set Time: ${selectedTime.format(context)}'),
+                onTap: () async {
+                  final TimeOfDay? newTime = await showTimePicker(
+                    context: context,
+                    initialTime: selectedTime,
+                  );
+                  if (newTime != null && newTime != selectedTime) {
+                    setState(() {
+                      selectedTime = newTime;
+                    });
+                  }
+                },
               ),
             ],
           ),
@@ -120,11 +136,12 @@ class _AlarmState extends State<Alarm> {
             TextButton(
               onPressed: () {
                 Navigator.pop(
-                    context,
-                    AlarmModel(
-                      title: titleController.text,
-                      time: timeController.text,
-                    ));
+                  context,
+                  AlarmModel(
+                    title: titleController.text,
+                    time: '${selectedTime.hour}:${selectedTime.minute}',
+                  ),
+                );
               },
               child: const Text('Save'),
             ),
