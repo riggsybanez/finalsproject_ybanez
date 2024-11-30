@@ -12,6 +12,7 @@ class Clock extends StatefulWidget {
 class _ClockState extends State<Clock> {
   late Timer _timer;
   DateTime _currentDateTime = DateTime.now();
+  bool _isManualTime = false;
 
   @override
   void initState() {
@@ -21,9 +22,11 @@ class _ClockState extends State<Clock> {
 
   void _startClock() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        _currentDateTime = DateTime.now();
-      });
+      if (!_isManualTime) {
+        setState(() {
+          _currentDateTime = DateTime.now();
+        });
+      }
     });
   }
 
@@ -49,6 +52,7 @@ class _ClockState extends State<Clock> {
 
       if (newTime != null) {
         setState(() {
+          _isManualTime = true;
           _currentDateTime = DateTime(
             newDate.year,
             newDate.month,
@@ -63,7 +67,6 @@ class _ClockState extends State<Clock> {
 
   @override
   Widget build(BuildContext context) {
-    // Day and month names
     const List<String> days = [
       "Monday",
       "Tuesday",
